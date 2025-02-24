@@ -26,23 +26,13 @@ class Database:
         self.cursor.execute("SELECT * FROM expenses")
         return self.cursor.fetchall()
 
-    def delete_expense(self, expense_id):
-        self.cursor.execute("DELETE FROM expenses WHERE id=?", (expense_id,))
+    def delete_expense(self, id):
+        self.cursor.execute("DELETE FROM expenses WHERE id=?", (id,))
         self.conn.commit()
 
-    def update_expense(self, expense_id, name, amount):
-        self.cursor.execute("UPDATE expenses SET name=?, amount=? WHERE id=?", (name, amount, expense_id))
+    def update_expense(self, id, name, expense, amount):
+        self.cursor.execute("UPDATE expenses SET name=?, expense=?, amount=? WHERE id=?", (name, expense, amount, id))
         self.conn.commit()
 
     def close(self):
         self.conn.close()
-
-if __name__ == "__main__":
-    db = Database()
-    db.add_expense("Lunch", 12.99, 1)
-    print(db.get_expenses())
-    db.delete_expense(5)
-    db.update_expense(10, "Dinner", 19.99)
-    for i in db.get_expenses():
-        print(i)
-    db.conn.close()
