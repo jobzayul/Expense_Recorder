@@ -11,19 +11,9 @@ class ExpenseController:
     def get_expenses(self):
         return self.db.get_expenses()
 
-    def delete_expense(self, expense_id):
-        self.db.delete_expense(expense_id)
+    def delete_expense(self, id):
+        self.db.delete_expense(id)
 
-    def update_expense(self, expense_id, name, amount):
-        self.db.update_expense(expense_id, name, amount)
-
-
-if __name__ == "__main__":
-    controller = ExpenseController()
-    controller.add_expense("Lunch", 12.99, 1)
-    controller.delete_expense(4)
-    controller.update_expense(3, "Dinner", 19.99)
-    for i in controller.get_expenses():
-        print(i)
-    
+    def update_expense(self, id, name, expense, amount):
+        self.db.update_expense(id, name, expense, amount)
     
